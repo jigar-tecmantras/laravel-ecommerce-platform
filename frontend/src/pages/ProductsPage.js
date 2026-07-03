@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import CategorySidebar from '../components/CategorySidebar';
-import ProductCard from '../components/ProductCard';
 import { fetchCategories, fetchProducts } from '../api/catalog';
 import useAuth from '../hooks/useAuth';
 
@@ -65,7 +63,11 @@ const ProductsPage = () => {
             {error && <p className='form-error'>{error}</p>}
             <div className='cards-grid'>
               {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <article key={product.id} className='product-card'>
+                  <h3>{product.name}</h3>
+                  <p className='muted'>{product.category?.name ?? 'Uncategorized'}</p>
+                  <p className='price'>${product.price?.toFixed(2)}</p>
+                </article>
               ))}
             </div>
           </div>
